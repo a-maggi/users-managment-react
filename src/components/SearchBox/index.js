@@ -3,7 +3,7 @@ import useOnclickOutside from "react-cool-onclickoutside";
 import ItemSearch from './ItemSearch';
 import { filterUsersByName, isUserAlreadyAdded } from 'lib/utils';
 const SearchBox = ({ disabled, users, usersSelected, handleUser }) => {
-
+  
   const searchInput = React.createRef();
   const [results, setResults] = useState([]);
   const [error, setError] = useState(false);
@@ -15,11 +15,7 @@ const SearchBox = ({ disabled, users, usersSelected, handleUser }) => {
   });
 
   useEffect(() => {
-    //document.addEventListener("click", handleOuterClick);
-  }, []);
-
-  useEffect(() => {
-    if (results.length == 0)
+    if (results.length === 0)
       setError(true);
     else
       setError(false)
@@ -27,15 +23,10 @@ const SearchBox = ({ disabled, users, usersSelected, handleUser }) => {
 
   const handleSearch = (value) => {
     let search = value.trim(); // sanitaze
-    if (search.length == 0) return;
+    if (search.length === 0) return;
     setShowResults(true)
     const data = filterUsersByName(users, search);
     setResults(data);
-  }
-
-  const handleOuterClick = () => {
-    setResults([]);
-    setShowResults(false);
   }
 
   return (
@@ -63,7 +54,7 @@ const SearchBox = ({ disabled, users, usersSelected, handleUser }) => {
 
 const ResultList = React.memo(({ results, handleUser, usersSelected }) => {
   return (
-    <div className="border-2 border-gray-300 mt-3 shadow-xl bg-white p-2 absolute w-full b transition-all rounded-md">
+    <div className="result-list border-2 border-gray-300 mt-3 shadow-xl bg-white p-2 absolute w-full b transition-all rounded-md">
       {results.length > 0 ?
         results.map((item) => <ItemSearch key={item.email} item={item} handleClick={handleUser} alreadyExist={isUserAlreadyAdded(usersSelected, item.email)} />) :
         <p className="px-2 text-red-400">No user found with that value</p>
