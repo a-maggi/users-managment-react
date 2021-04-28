@@ -3,25 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.1.0",
-    "@tailwindcss/postcss7-compat": "^2.0.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "autoprefixer": "^9.8.6",
-    "postcss": "^7.0.35",
+    "postcss": "^8.2.13",
+    "postcss-cli": "^8.3.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-cool-onclickoutside": "^1.5.9",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.2",
+    "react-scripts": "4.0.2"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "2.1.0",
+    "autoprefixer": "^9.8.6",
+    "cssnano": "4.1.10",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
+    "start": "yarn run build:css && react-scripts start",
+    "build": "yarn run build:css && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build:css": "postcss src/styles/index.src.css -o src/styles/index.css"
   },
   "eslintConfig": {
     "extends": [
